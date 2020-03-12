@@ -7,7 +7,7 @@ geocodificadorModulo = (function () {
     para que se obtengan las coordenadas a partir de la dirección pasada por parámetro
     y que llame a la función pasada por parámetro con los siguientes parámetros
     dirección: la dirección pasada por parámetro
-    coordenada: la ubicación de tipo google.maps.LatLng 
+    coordenada: la ubicación de tipo google.maps.LatLng */
     geocodificador.geocode( {'address': direccion}, function(results, status){
       if(status == 'OK'){
         var direccionGeocodificada = results[0].geometry.location;
@@ -16,7 +16,7 @@ geocodificadorModulo = (function () {
       else{
         alert('Geocode was not successful for the following reason: ' + status);
       }
-    });*/
+    });
     /* 
     results[]: {
       geometry: {
