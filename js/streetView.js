@@ -6,7 +6,7 @@ streetViewModulo = (function () {
     panorama = new google.maps.StreetViewPanorama(
       document.getElementById('pano'),
       {
-        position: posicionCentral
+        position: {lat: -31.4199445, lng: -64.1891036}
       }
     );
     

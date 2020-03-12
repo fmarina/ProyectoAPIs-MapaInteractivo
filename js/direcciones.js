@@ -70,7 +70,7 @@ direccionesModulo = (function () {
         // Calcula las rutas cuando se presioná enter en el campo desde y hay un valor disitnto a vacío en 'hasta'
     $('#desde').keypress(function (e) {
       if (e.keyCode == 13 && document.getElementById('hasta').value != '') {
-        direccionesModulo.calcularYMostrarRutas()
+        direccionesModulo.calcularYMostrarRutas()        
       }
     })
 
