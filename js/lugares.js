@@ -4,22 +4,26 @@ lugaresModulo = (function () {
     // Completa las direcciones ingresadas por el usuario a y establece los límites
     // con un círculo cuyo radio es de 20000 metros.
   function autocompletar () {
-        /* Completar la función autocompletar(): autocompleta los 4 campos de texto de la
-        página (las direcciones ingresables por el usuario).
-        Para esto creá un círculo con radio de 20000 metros y usalo para fijar
-        los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
-        var circulo = new google.maps.Circle({
-          map: mapa,
-          center: posicionCentral,
-          radius: 20000,
-          visible: false
-        });
-                  
-        var allInputs = document.querySelectorAll('[type="textbox"]');
-        allInputs.forEach(input => {
-          var autocomplete = new google.maps.places.Autocomplete(input);
-          autocomplete.setBounds(circulo.getBounds());                   
-        });
+    /* Completar la función autocompletar(): autocompleta los 4 campos de texto de la página (las direcciones ingresables por el usuario).
+    Para esto creá un círculo con radio de 20000 metros y usalo para fijar los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
+    
+    var circulo = new google.maps.Circle({
+      map: mapa,
+      center: posicionCentral,
+      radius: 20000,
+      visible: false
+    });
+
+    var allInputs = document.querySelectorAll('[type="textbox"]');
+    allInputs.forEach(input => {
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.setBounds(circulo.getBounds());
+      // setBounds()para cambiar el área de búsqueda en una existente Autocomplete.              
+    });
+    
+    //bounds es un google.maps.LatLngBounds objeto que especifica el área en la que buscar lugares. Los resultados están sesgados hacia, pero no restringidos a, lugares contenidos dentro de estos límites.
+        
+
         /*
         InvalidValueError: not an instance of HTMLInputElement
         Uncaught (in promise) TypeError: Cannot read property 'activeElement' of undefined
