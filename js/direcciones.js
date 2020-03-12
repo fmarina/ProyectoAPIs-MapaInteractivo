@@ -93,6 +93,35 @@ direccionesModulo = (function () {
     // dependiendo de la formaDeIr que puede ser Caminando, Auto o Bus/Subterraneo/Tren
   function calcularYMostrarRutas () {
     /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones y luego muestra la ruta. */
+    var origen = document.getElementById('desde').value;
+    var destino = document.getElementById('hasta').value;
+    var formaDeIr = document.getElementById('comoIr').value;
+    /*
+    google.maps.TravelMode{
+      DRIVING: "DRIVING", 
+      WALKING: "WALKING", 
+      BICYCLING: "BICYCLING", 
+      TRANSIT: "TRANSIT", 
+      TWO_WHEELER: "TWO_WHEELER"
+    }
+    */    
+    if(formaDeIr == 'Auto') formaDeIr = google.maps.TravelMode.DRIVING;
+    if(formaDeIr == 'Caminando') formaDeIr = google.maps.TravelMode.WALKING;
+    if(formaDeIr == 'Bus/Subterraneo/Tren') formaDeIr = google.maps.TravelMode.TRANSIT;
+
+    var request = {
+      origin: origen,
+      destination: destino,
+      travelMode: formaDeIr
+    };
+      // Servicio que calcula las direcciones 
+    servicioDirecciones.route(request, function(result, status) {
+      if (status == 'OK') {
+        // Servicio muestra las direcciones
+        mostradorDirecciones.setDirections(result); 
+       // mostradorDirecciones.setMap(mapa);
+      }
+    });
     
   }
 
