@@ -8,20 +8,27 @@ lugaresModulo = (function () {
         página (las direcciones ingresables por el usuario).
         Para esto creá un círculo con radio de 20000 metros y usalo para fijar
         los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
-        /*
         var circulo = new google.maps.Circle({
           map: mapa,
           center: posicionCentral,
           radius: 20000,
           visible: false
         });
-        var inputDireccion = document.getElementById('direccion');
-        var inputDesde = document.getElementById('desde');
-        var inputHasta = document.getElementById('hasta');
-        var inputAgregar = document.getElementById('agregar');
-        
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        var place = autocomplete.getPlace();*/
+                  
+        var allInputs = document.querySelectorAll('[type="textbox"]');
+        allInputs.forEach(input => {
+          var autocomplete = new google.maps.places.Autocomplete(input);
+          autocomplete.setBounds(circulo.getBounds());                   
+        });
+        /*
+        InvalidValueError: not an instance of HTMLInputElement
+        Uncaught (in promise) TypeError: Cannot read property 'activeElement' of undefined
+        var $allInputs = $('[type="textbox"]');        
+        $allInputs.each(function(input){
+          var autocomplete = new google.maps.places.Autocomplete(input);
+          autocomplete.setBounds(circulo.getBounds());          
+        });
+        */
   }
 
     // Inicializo la variable servicioLugares y llamo a la función autocompletar
