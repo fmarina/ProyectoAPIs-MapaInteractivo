@@ -93,9 +93,20 @@ direccionesModulo = (function () {
     // dependiendo de la formaDeIr que puede ser Caminando, Auto o Bus/Subterraneo/Tren
   function calcularYMostrarRutas () {
     /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones y luego muestra la ruta. */
+    mostradorDirecciones.setMap(mapa);
+
     var origen = document.getElementById('desde').value;
     var destino = document.getElementById('hasta').value;
     var formaDeIr = document.getElementById('comoIr').value;
+    var intermediatePoints = [];
+
+    $("#puntosIntermedios option:selected").each(function() {
+      intermediatePoints.push({
+        location: $(this).text(),
+        stopover: true
+      });
+    });  
+    
     /*
     google.maps.TravelMode{
       DRIVING: "DRIVING", 
@@ -112,16 +123,23 @@ direccionesModulo = (function () {
     var request = {
       origin: origen,
       destination: destino,
-      travelMode: formaDeIr
+      travelMode: formaDeIr,
+      waypoints: intermediatePoints
     };
       // Servicio que calcula las direcciones 
     servicioDirecciones.route(request, function(result, status) {
       if (status == 'OK') {
         // Servicio muestra las direcciones
         mostradorDirecciones.setDirections(result); 
-       // mostradorDirecciones.setMap(mapa);
       }
     });
+
+    /*waypoints[] especifica un conjunto de DirectionsWaypoint. Los waypoints modifican un trayecto haciendo que pase por las ubicaciones especificadas. Un waypoint se especifica como un literal de objeto con los campos:
+    - location: especifica la ubicación del waypoint, como un LatLng , un objeto 
+    google.maps.Place o un String que llevará geocodificación.
+    - stopover: es un booleano que indica que el waypoint es un punto de detención en la ruta, el cual tiene el efecto de dividirla en dos.
+
+    optimizeWaypoints especifica que la ruta en la que se usan los waypointsproporcionados puede optimizarse si se ordenan estos waypoints con mayor eficacia. Si el valor es true, el servicio de indicaciones devolverá los waypoints reordenados en un campo waypoint_order.*/
     
   }
 
