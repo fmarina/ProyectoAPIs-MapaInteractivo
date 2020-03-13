@@ -7,10 +7,6 @@ marcadorModulo = (function () {
 
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
-    /* Completar la función mostrarMiMarcador() para crear un marcador en la posición pasada por parámetro y mostrarlo en el mapa. 
-    Este marcador debe tener un título, una animación.
-    El marcador que vas a crear debe asignarse a la variable miMarcador*/
-
     miMarcador = new google.maps.Marker({
       position: ubicacion,
       map: mapa,
@@ -25,14 +21,12 @@ marcadorModulo = (function () {
     var marcadorLatLng = new google.maps.LatLng({ lat: marcador.getPosition().lat(), lng: marcador.getPosition().lng() })
     direccionesModulo.agregarDireccion(marcador.getTitle(), marcadorLatLng)
   }
-
     // Agrega al mapa todos los marcadores.
   function marcadoresEnMapa (marcadores, mapa) {
     for (var i = 0; i < marcadores.length; i++) {
       marcadores[i].setMap(mapa)
     }
   }
-
     // Muestra todos los marcadores. Por ahora no la uso
   function mostrarMarcadores (marcadores) {
     marcadoresEnMapa(marcadores, mapa)
@@ -66,10 +60,7 @@ marcadorModulo = (function () {
       marcadorModulo.marcar()
     }
   })
-
-    // Cuando cambia el elemento "radio" marco todos lugares cerca
-    // del lugar indicado por MiMarcador con el nuevo radio
-
+    // Cuando cambia el elemento "radio" marco todos lugares cerca del lugar indicado por MiMarcador con el nuevo radio
   var rango = document.getElementById('radio')
   rango.addEventListener('change', function () {
     marcadorModulo.marcar()
@@ -111,9 +102,8 @@ marcadorModulo = (function () {
         }
       }
     })
-
-        // Cuando haces clic sobre el marcador, muestra la foto,
-        // el nombre y la valuación del lugar si es que lo tienen.
+    
+    // Cuando haces clic sobre el marcador, muestra la foto, el nombre y la valuación del lugar si es que lo tienen.
     var lugarLoc = lugar.geometry.location
     google.maps.event.addListener(marcador, 'click', function () {
       streetViewModulo.fijarStreetView(lugarLoc)
@@ -121,8 +111,7 @@ marcadorModulo = (function () {
       if (lugar.rating) {
         valuacion = lugar.rating.toString()
       }
-
-            // agrega información del lugar en la ventana del marcador
+        // agrega información del lugar en la ventana del marcador
       if (lugar.photos) {
         var url = lugar.photos[0].getUrl({
           'maxWidth': 80,
