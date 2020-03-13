@@ -40,7 +40,7 @@ direccionesModulo = (function () {
     }
   }
 
-    // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
+    // Agrega la dirección en las listas de puntos intermedios y lo muestra con el streetView
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this
     var ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
@@ -57,7 +57,7 @@ direccionesModulo = (function () {
     mapa.setCenter(ubicacion)
   }
 
-    // Inicializo las variables que muestra el panel y el que calcula las rutas//
+    // Se inicializan las variables que muestra el panel y el que calcula las rutas
   function inicializar () {
     calcularRutasConClic()
         // Agrega la direccion cuando se presioná enter en el campo agregar
@@ -92,7 +92,7 @@ direccionesModulo = (function () {
     // Calcula la ruta entre los puntos Desde y Hasta con los puntosIntermedios
     // dependiendo de la formaDeIr que puede ser Caminando, Auto o Bus/Subterraneo/Tren
   function calcularYMostrarRutas () {
-    /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones y luego muestra la ruta. */
+
     mostradorDirecciones.setMap(mapa);
 
     var origen = document.getElementById('desde').value;
@@ -105,17 +105,14 @@ direccionesModulo = (function () {
         location: $(this).text(),
         stopover: true
       });
-    });  
-    
-    /*
-    google.maps.TravelMode{
-      DRIVING: "DRIVING", 
-      WALKING: "WALKING", 
-      BICYCLING: "BICYCLING", 
-      TRANSIT: "TRANSIT", 
-      TWO_WHEELER: "TWO_WHEELER"
-    }
-    */    
+    });      
+      /*google.maps.TravelMode{
+          DRIVING: "DRIVING", 
+          WALKING: "WALKING", 
+          BICYCLING: "BICYCLING", 
+          TRANSIT: "TRANSIT", 
+          TWO_WHEELER: "TWO_WHEELER"
+        }*/    
     if(formaDeIr == 'Auto') formaDeIr = google.maps.TravelMode.DRIVING;
     if(formaDeIr == 'Caminando') formaDeIr = google.maps.TravelMode.WALKING;
     if(formaDeIr == 'Bus/Subterraneo/Tren') formaDeIr = google.maps.TravelMode.TRANSIT;
@@ -126,10 +123,9 @@ direccionesModulo = (function () {
       travelMode: formaDeIr,
       waypoints: intermediatePoints
     };
-      // Servicio que calcula las direcciones 
+
     servicioDirecciones.route(request, function(result, status) {
       if (status == 'OK') {
-        // Servicio muestra las direcciones
         mostradorDirecciones.setDirections(result); 
       }
     });
@@ -137,10 +133,7 @@ direccionesModulo = (function () {
     /*waypoints[] especifica un conjunto de DirectionsWaypoint. Los waypoints modifican un trayecto haciendo que pase por las ubicaciones especificadas. Un waypoint se especifica como un literal de objeto con los campos:
     - location: especifica la ubicación del waypoint, como un LatLng , un objeto 
     google.maps.Place o un String que llevará geocodificación.
-    - stopover: es un booleano que indica que el waypoint es un punto de detención en la ruta, el cual tiene el efecto de dividirla en dos.
-
-    optimizeWaypoints especifica que la ruta en la que se usan los waypointsproporcionados puede optimizarse si se ordenan estos waypoints con mayor eficacia. Si el valor es true, el servicio de indicaciones devolverá los waypoints reordenados en un campo waypoint_order.*/
-    
+    - stopover: es un booleano que indica que el waypoint es un punto de detención en la ruta, el cual tiene el efecto de dividirla en dos.*/    
   }
 
   return {
